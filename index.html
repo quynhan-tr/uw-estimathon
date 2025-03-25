@@ -1,96 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="/_vercel/insights/script.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css"
-    />
-    <title>Vercel HTML Starter</title>
-    <meta
-      name="description"
-      content="High-performance HTML based website template."
-    />
-  </head>
-  <body>
-    <h1>Vercel HTML Starter</h1>
-    <p>
-      This template is a simple, but powerful single
-      <code>index.html</code> file deployed to
-      <a href="https://vercel.com">Vercel</a>. When your site is deployed, all
-      static assets (like HTML, JavaScript, CSS, images, and more) are deployed
-      globally to every
-      <a href="https://vercel.com/docs/concepts/edge-network/overview"
-        >Vercel Edge Network</a
-      >
-      region.
-    </p>
-    <h2>Simple, privacy-friendly analytics</h2>
-    <p>
-      Want to understand your visitor traffic? Vercel Analytics gives you
-      first-party, privacy-friendly traffic analytics for your HTML site. This
-      template is already configured using the following script:
-    </p>
-    <pre><code>&lt;script defer src="/_vercel/insights/script.js"&gt;&lt;/script&gt;</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/analytics">Vercel Analytics</a>.
-    </p>
-    <h2>Integrated with git</h2>
-    <p>
-      Deploying updates to your site is as simple as
-      <code>git push</code> thanks to Vercel's advanced
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-      Support for GitHub, GitLab, Bitbucket is zero-configuration, and with the
-      flexible Vercel CLI and API, you can integrate with any tool possible.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/git">Git Integration</a>.
-    </p>
-    <h2>Fast <code>gzip</code> compression</h2>
-    <p>
-      To help ensure the smallest possible file sizes for your static assets,
-      the Vercel Edge Network compresses files by default using
-      <code>gzip</code>. You can also optionally use
-      <code>brotli</code> compressesion if you prefer.
-    </p>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/edge-network/compression"
-        >compression</a
-      >.
-    </p>
-    <h2>Advanced routing configuration</h2>
-    <p>
-      Vercel gives you a variety of ways to configure the routing of your
-      website. For example, adding redirects, rewrites, or headers to your page.
-      While you can use <code>vercel.json</code> to define these through JSON,
-      you can also express your routing configuration as code using
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-    <p>
-      Middleware runs before the
-      <a href="https://vercel.com/docs/concepts/edge-network/caching"
-        >Vercel Edge Network Cache</a
-      >, so you can configure routing exactly as your application needs. For
-      example, this template uses <code>middleware.js</code> defined in the root
-      of the repository to add additional security headers to the site:
-    </p>
-    <pre><code>referrer-policy: origin-when-cross-origin
-strict-transport-security: max-age=31536000; includeSubDomains; preload
-x-content-type-options: nosniff
-x-dns-prefetch-control: on
-x-frame-options: DENY</code></pre>
-    <p>
-      Learn more about
-      <a href="https://vercel.com/docs/concepts/functions/edge-middleware"
-        >Vercel Edge Middleware</a
-      >.
-    </p>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UW DSC Estimathon</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="UW DSC Logo">
+                <h1>ESTIMATHON</h1>
+            </div>
+            <button class="rules-button" onclick="openRules()">Rules</button>
+        </header>
+        <main>
+            <div class="form-container">
+                <h2>Submission</h2>
+                <form action="https://docs.google.com/forms/d/e/1FAIpQLSeew_KkOmTvCWeDuHz_3Q3KzZ8DZTdRE_xhRdSleCjdY4vnPg/formResponse" method="post" target="hiddenConfirm" onsubmit="submitted=true; return validateForm();">
+                    <label for="groupNumber">Group Number</label>
+                    <input type="text" id="groupNumber" name="entry.42548516" placeholder="Enter group number">
+                    
+                    <label for="contactEmail">Contact Email</label>
+                    <input type="email" id="contactEmail" name="entry.171689670" placeholder="Guesses' results will be sent here">
+                    
+                    <label for="questionNumber">Question Number</label>
+                    <div class="radio-group">
+                        <div class="radio-pair">
+                            <input type="radio" id="question1" name="entry.1017256989" value="1">
+                            <label for="question1">1</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question2" name="entry.1017256989" value="2">
+                            <label for="question2">2</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question3" name="entry.1017256989" value="3">
+                            <label for="question3">3</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question4" name="entry.1017256989" value="4">
+                            <label for="question4">4</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question5" name="entry.1017256989" value="5">
+                            <label for="question5">5</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question6" name="entry.1017256989" value="6">
+                            <label for="question6">6</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question7" name="entry.1017256989" value="7">
+                            <label for="question7">7</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question8" name="entry.1017256989" value="8">
+                            <label for="question8">8</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question9" name="entry.1017256989" value="9">
+                            <label for="question9">9</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question10" name="entry.1017256989" value="10">
+                            <label for="question10">10</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question11" name="entry.1017256989" value="11">
+                            <label for="question11">11</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question12" name="entry.1017256989" value="12">
+                            <label for="question12">12</label>
+                        </div>
+                        <div class="radio-pair">
+                            <input type="radio" id="question13" name="entry.1017256989" value="13">
+                            <label for="question13">13</label>
+                        </div>
+                    </div>
+                    
+                    <label for="lowerBound">Lower Bound</label>
+                    <input type="text" id="lowerBound" name="entry.424934828" placeholder="Input positive number">
+                    
+                    <label for="upperBound">Upper Bound</label>
+                    <input type="text" id="upperBound" name="entry.342609510" placeholder="Input positive number">
+                    
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- Rules Overlay -->
+    <div id="rulesOverlay" class="rules-overlay">
+        <div class="rules-content">
+            <button class="close-button" onclick="closeRules()">Back</button>
+            <h2>Overview</h2>
+            <p>Your team will have 30 minutes to work on 13 estimation problems. The answer to each problem is a positive number. Your team will submit intervals for each problem. Intervals may not contain negative numbers or zero.</p>
+            <h2>Scoring</h2>
+            <p>An interval is good if it contains the correct answer. After the 30 minutes is over, the final score for your team will be:</p>
+            <img src="formula.png" alt="Scoring Formula">
+            <p>That is, for every problem you get wrong (or leave blank), your score doubles. The winning team is the team with the LOWEST SCORE.</p>
+            <h2>Submitting Intervals</h2>
+            <p>Every team can submit up to 18 total intervals. There will be a scoreboard that will be updated in real time based on the intervals that are being submitted.</p>
+            <h2>Re-submitting</h2>
+            <p>Given that each has 18 answer slips and that there are only 13 problems, it is possible to submit intervals for a given problem more than once. If you do this, only the last submission for any given problem is the one that will count towards your final score. To put it another way: each submission (right or wrong) overrides any previous submissions for a given problem.</p>
+        </div>
+    </div>
+        
+    <script>
+        function validateForm() {
+            var groupNumber = document.querySelector('input[name="entry.42548516"]').value;
+            if (isNaN(groupNumber) || groupNumber.trim() === '') {
+                alert('Please enter a valid group number');
+                return false;
+            }
+            var email = document.querySelector('input[name="entry.171689670"]').value;
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address');
+                return false;
+            }
+            var questionNumber = document.querySelector('input[name="entry.1017256989"]:checked');
+            var lowerBound = document.querySelector('input[name="entry.424934828"]').value;
+            var upperBound = document.querySelector('input[name="entry.342609510"]').value;
+            if (isNaN(lowerBound) || isNaN(upperBound) || Number(lowerBound) <= 0 || Number(upperBound) <= 0) {
+                alert('Both lower and upper bounds must be positive numbers');
+                return false;
+            }
+            if (Number(lowerBound) >= Number(upperBound)) {
+                alert('Lower bound must be smaller than upper bound');
+                return false;
+            }
+            if (groupNumber === '' || email === '' || questionNumber === null || lowerBound === '' || upperBound === '') {
+                alert('Please fill out all fields');
+                return false;
+            }
+            return true;
+        }
+
+        var submitted = false;
+
+        function openRules() {
+            document.getElementById('rulesOverlay').style.right = '0';
+        }
+
+        function closeRules() {
+            document.getElementById('rulesOverlay').style.right = '-100%';
+        }
+    </script>
+    <iframe name="hiddenConfirm" id="hiddenConfirm" style="display:none;" onload="if(submitted) {window.location='confirmation.html';}"></iframe>
+</body>
 </html>
