@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Confirmation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="UW DSC Logo">
+                <h1>ESTIMATHON</h1>
+            </div>
+            <button class="rules-button" onclick="openRules()">Rules</button>
+        </header>
+        <main>
+            <div class="confirmation-container">
+                <h1>Thank you for your submission!</h1>
+                <p>Check your email for the result of your guess.</p>
+                <a href="submission.html">
+                    <button class="submit-another-button">Submit another response</button>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <!-- Rules Overlay -->
+    <div id="rulesOverlay" class="rules-overlay">
+        <div class="rules-content">
+            <button class="close-button" onclick="closeRules()">Back</button>
+            <h2>Overview</h2>
+            <p>Your team will have 30 minutes to work on 13 estimation problems. The answer to each problem is a positive number. Your team will submit intervals for each problem. Intervals may not contain negative numbers or zero.</p>
+            <h2>Scoring</h2>
+            <p>An interval is good if it contains the correct answer. After the 30 minutes is over, the final score for your team will be:</p>
+            <img src="formula.png" alt="Scoring Formula">
+            <p>That is, for every problem you get wrong (or leave blank), your score doubles. The winning team is the team with the LOWEST SCORE.</p>
+            <h2>Submitting Intervals</h2>
+            <p>Every team can submit up to 18 total intervals. There will be a scoreboard that will be updated in real time based on the intervals that are being submitted.</p>
+            <h2>Re-submitting</h2>
+            <p>Given that each has 18 answer slips and that there are only 13 problems, it is possible to submit intervals for a given problem more than once. If you do this, only the last submission for any given problem is the one that will count towards your final score. To put it another way: each submission (right or wrong) overrides any previous submissions for a given problem.</p>
+        </div>
+    </div>
+
+    <script>
+        function openRules() {
+            document.getElementById('rulesOverlay').style.right = '0';
+        }
+
+        function closeRules() {
+            document.getElementById('rulesOverlay').style.right = '-100%';
+        }
+    </script>
+</body>
+</html>
