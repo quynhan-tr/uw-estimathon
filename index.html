@@ -131,7 +131,7 @@
                 alert('Both lower and upper bounds must be positive numbers');
                 return false;
             }
-            if (Number(lowerBound) >= Number(upperBound)) {
+            if (Number(lowerBound) > Number(upperBound)) {
                 alert('Lower bound must be smaller than upper bound');
                 return false;
             }
