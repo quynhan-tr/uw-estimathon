@@ -179,8 +179,16 @@
             // Fetch leaderboard data when the overlay is opened
             fetchLeaderboardData();
             document.getElementById('leaderboardOverlay').style.right = '0';
+
+            // Start refreshing the leaderboard every 45 seconds
+            leaderboardRefreshInterval = setInterval(fetchLeaderboardData, 45000);
+        }
+
         function closeLeaderboard() {
             document.getElementById('leaderboardOverlay').style.right = '-100%';
+
+            // Stop refreshing the leaderboard when the overlay is closed
+            clearInterval(leaderboardRefreshInterval);
         }
 
         async function fetchLeaderboardData() {
