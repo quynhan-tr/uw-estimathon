@@ -33,6 +33,7 @@ header {
     background-color: #1A2A5E;
     z-index: 1000;
     box-sizing: border-box;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
 
 .logo {
@@ -86,6 +87,7 @@ header {
     gap: 20px; 
     justify-content: flex-end; 
     margin-top: 10px; 
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
 }
 
 /* Rules Overlay */
@@ -317,6 +319,8 @@ button[type="submit"]:hover {
 @media (max-width: 768px) {
     header {
         padding: 10px 20px;
+        flex-direction: column; /* Stack logo and buttons vertically */
+        align-items: center;
     }
 
     .logo img {
@@ -348,5 +352,16 @@ button[type="submit"]:hover {
 
     .radio-group {
         gap: 5px;
+    }
+
+    .button-container {
+        justify-content: center; /* Center buttons on smaller screens */
+        margin-top: 10px;
+        gap: 10px; /* Reduce gap between buttons */
+    }
+
+    .overlay-button {
+        padding: 8px 20px; /* Adjust button padding for smaller screens */
+        font-size: 1rem; /* Adjust font size for smaller screens */
     }
 }
