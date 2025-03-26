@@ -151,6 +151,37 @@
         function closeRules() {
             document.getElementById('rulesOverlay').style.right = '-100%';
         }
+
+        function submitForm(event) {
+          event.preventDefault();
+          
+          // Validate form (keep your existing validation)
+          if (!validateForm()) return false;
+          
+          // Get form data
+          const form = document.getElementById('estimathonForm');
+          const formData = new FormData(form);
+          
+          // Send data to Google Apps Script
+          fetch('https://script.google.com/macros/s/AKfycbyc2-YocgzxPLD8_MEp1S2P3-04co961GyANUAz15UQw_bkE4ZWb8q2hFfMVN1ssEZ4gw/exec', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Store the response data in sessionStorage
+            sessionStorage.setItem('estimathonResponse', JSON.stringify(data));
+            // Redirect to confirmation page
+            window.location.href = 'confirmation.html';
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error submitting your form. Please try again.');
+          });
+          
+          return false;
+        }
+
     </script>
     <iframe name="hiddenConfirm" id="hiddenConfirm" style="display:none;" onload="if(submitted) {window.location='confirmation.html';}"></iframe>
 </body>
