@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estimathon Leaderboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono&display=swap" rel="stylesheet">
+    <style>
+        .leaderboard-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .refresh-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="logo.png" alt="UW DSC Logo">
+                <h1>ESTIMATHON LEADERBOARD</h1>
+            </div>
+        </header>
+        <main>
+            <div class="leaderboard-container">
+                <table id="leaderboardTable">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Team</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+                <button class="refresh-btn" onclick="loadLeaderboard()">Refresh</button>
+                <a href="index.html">
+                    <button class="submit-another-button">Back to Submission</button>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Load leaderboard when page opens
+        document.addEventListener('DOMContentLoaded', loadLeaderboard);
+        
+        async function loadLeaderboard() {
+            try {
+                const webAppUrl = 'https://script.google.com/macros/s/AKfycbz6SNjsBq9o4jvn8V2fqyJQ1YFIeIFCrlDQvEzWUPsyXj4OUpp2fBs4ZV7ONvPaNK_-Pw/exec';
+                
+                const response = await fetch(webAppUrl);
+                const data = await response.json();
+                
+                const tableBody = document.querySelector('#leaderboardTable tbody');
+                tableBody.innerHTML = '';
+                
+                data.forEach((team, index) => {
+                    const row = document.createElement('tr');
+                    
+                    // Highlight the first place team
+                    if (index === 0) {
+                        row.style.backgroundColor = '#fffacd';
+                    }
+                    
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${team.team}</td>
+                        <td>${team.score}</td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
+                
+            } catch (error) {
+                console.error('Error loading leaderboard:', error);
+                alert('Failed to load leaderboard. Please try again.');
+            }
+        }
+
+        setInterval(loadLeaderboard, 30000);
+    </script>
+</body>
+</html>
