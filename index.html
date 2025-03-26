@@ -19,7 +19,7 @@
         <main>
             <div class="form-container">
                 <h2>Submission</h2>
-                <form action="https://docs.google.com/forms/d/e/1FAIpQLSeew_KkOmTvCWeDuHz_3Q3KzZ8DZTdRE_xhRdSleCjdY4vnPg/formResponse" method="post" target="hiddenConfirm" onsubmit="submitted=true; return validateForm();" id="estimathonForm" onsubmit="return submitForm(event)">
+                <form action="https://docs.google.com/forms/d/e/1FAIpQLSeew_KkOmTvCWeDuHz_3Q3KzZ8DZTdRE_xhRdSleCjdY4vnPg/formResponse" method="post" target="hiddenConfirm" onsubmit="submitted=true; return validateForm();">
                     <label for="groupNumber">Group Number</label>
                     <input type="text" id="groupNumber" name="entry.42548516" placeholder="Enter group number">
                     
@@ -150,36 +150,6 @@
 
         function closeRules() {
             document.getElementById('rulesOverlay').style.right = '-100%';
-        }
-
-        function submitForm(event) {
-          event.preventDefault();
-          
-          // Validate form (keep your existing validation)
-          if (!validateForm()) return false;
-          
-          // Get form data
-          const form = document.getElementById('estimathonForm');
-          const formData = new FormData(form);
-          
-          // Send data to Google Apps Script
-          fetch('https://script.google.com/macros/s/AKfycbzgErjGY9HD3IDPcW2XGcdTJwzyhGnA6E8lbbwXPwjYfSjeqbOjIHnhgPQvMyUArMDUXA/exec', {
-            method: 'POST',
-            body: formData
-          })
-          .then(response => response.json())
-          .then(data => {
-            // Store the response data in sessionStorage
-            sessionStorage.setItem('estimathonResponse', JSON.stringify(data));
-            // Redirect to confirmation page
-            window.location.href = 'confirmation.html';
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            alert('There was an error submitting your form. Please try again.');
-          });
-          
-          return false;
         }
     </script>
     <iframe name="hiddenConfirm" id="hiddenConfirm" style="display:none;" onload="if(submitted) {window.location='confirmation.html';}"></iframe>

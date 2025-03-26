@@ -19,9 +19,6 @@
         <main>
             <div class="confirmation-container">
                 <h1>Thank you for your submission!</h1>
-                <div id="responseDetails">
-                    <!-- Details will be inserted here by JavaScript -->
-                </div>
                 <p>Check your email for the result of your guess.</p>
                 <a href="submission.html">
                     <button class="submit-another-button">Submit another response</button>
@@ -55,27 +52,6 @@
         function closeRules() {
             document.getElementById('rulesOverlay').style.right = '-100%';
         }
-
-        // Display the response details when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            const responseData = JSON.parse(sessionStorage.getItem('estimathonResponse'));
-            const detailsContainer = document.getElementById('responseDetails');
-            
-            if (responseData) {
-                detailsContainer.innerHTML = `
-                    <h3>Team ${responseData.teamNumber} - Question ${responseData.questionNumber}</h3>
-                    <p>Range: ${responseData.lowerBound} to ${responseData.upperBound}</p>
-                    <p>${responseData.isRangeCorrect ? '✅ Range is CORRECT' : '❌ Range is INCORRECT'}</p>
-                    ${responseData.questionScore ? `<p>Score for this question: ${responseData.questionScore}</p>` : ''}
-                    <p>Remaining guesses: ${responseData.remainingGuesses}</p>
-                `;
-                
-                // Clear the stored data
-                sessionStorage.removeItem('estimathonResponse');
-            } else {
-                detailsContainer.innerHTML = '<p>Your submission has been received.</p>';
-            }
-        });
     </script>
 </body>
 </html>

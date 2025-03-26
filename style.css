@@ -310,20 +310,3 @@ button[type="submit"]:hover {
         gap: 5px;
     }
 }
-
-#responseDetails {
-    background-color: #f8f9fa;
-    border-left: 4px solid #3498db;
-    padding: 15px;
-    margin: 20px 0;
-    border-radius: 4px;
-}
-
-#responseDetails h3 {
-    margin-top: 0;
-    color: #2c3e50;
-}
-
-#responseDetails p {
-    margin: 8px 0;
-}
