@@ -14,8 +14,10 @@
                 <img src="logo.png" alt="UW DSC Logo">
                 <h1>ESTIMATHON</h1>
             </div>
-            <button class="rules-button" onclick="openRules()">Rules</button>
-            <button class="leaderboard-button" onclick="openLeaderboard()">Leaderboard</button>
+            <div class="button-container">
+                <button class="overlay-button" onclick="openRules()">Rules</button>
+                <button class="overlay-button" onclick="openLeaderboard()">Leaderboard</button>
+            </div>
         </header>
         <main>
             <div class="form-container">
@@ -96,7 +98,7 @@
     </div>
 
     <!-- Rules Overlay -->
-    <div id="rulesOverlay" class="rules-overlay">
+    <div id="rulesOverlay" class="overlay">
         <div class="rules-content">
             <button class="close-button" onclick="closeRules()">Back</button>
             <h2>Overview</h2>
@@ -113,7 +115,7 @@
     </div>
 
     <!-- Leaderboard Overlay -->
-    <div id="leaderboardOverlay" class="leaderboard-overlay">
+    <div id="leaderboardOverlay" class="overlay">
         <div class="leaderboard-content">
             <button class="close-button" onclick="closeLeaderboard()">Back</button>
             <h2>Leaderboard</h2>
