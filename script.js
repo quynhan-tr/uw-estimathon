@@ -42,16 +42,19 @@ function closeRules() {
   document.getElementById('rulesOverlay').style.right = '-100%';
 }
 
+// Tracks whether the leaderboard is enabled
+var leaderboardEnabled = true;
 let leaderboardRefreshInterval;
 
 // Opens the "Leaderboard" overlay and starts auto-refreshing the leaderboard
 function openLeaderboard() {
-  // Fetch leaderboard data when the overlay is opened
-  fetchLeaderboardData();
+  if (!leaderboardEnabled) {
+    alert('The leaderboard is currently disabled. Result will be announced soon!');
+    return;
+  }
+  fetchLeaderboardData(); // Fetch leaderboard data
   document.getElementById('leaderboardOverlay').style.right = '0';
-
-  // Start refreshing the leaderboard every 45 seconds
-  leaderboardRefreshInterval = setInterval(fetchLeaderboardData, 30000);
+  leaderboardRefreshInterval = setInterval(fetchLeaderboardData, 30000); // Refresh every 30 seconds
 }
 
 // Closes the "Leaderboard" overlay and stops auto-refreshing the leaderboard
