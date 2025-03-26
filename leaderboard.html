@@ -76,11 +76,19 @@
         
         async function loadLeaderboard() {
             try {
-                const webAppUrl = 'https://script.google.com/macros/s/AKfycbz6SNjsBq9o4jvn8V2fqyJQ1YFIeIFCrlDQvEzWUPsyXj4OUpp2fBs4ZV7ONvPaNK_-Pw/exec';
+                const webAppUrl = 'https://script.google.com/macros/s/AKfycbz6SNjsBq9o4jvn8V2fqyJQ1YFIeIFCrlDQvEzWUPsyXj4OUpp2fBs4ZV7ONvPaNK_-Pw/exec?action=getLeaderboard';
                 
+                console.log('Fetching leaderboard data...');
                 const response = await fetch(webAppUrl);
+                console.log('Response received:', response);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
                 const data = await response.json();
-                
+                console.log('Leaderboard data:', data);
+
                 const tableBody = document.querySelector('#leaderboardTable tbody');
                 tableBody.innerHTML = '';
                 
