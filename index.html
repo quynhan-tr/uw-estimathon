@@ -15,6 +15,7 @@
                 <h1>ESTIMATHON</h1>
             </div>
             <button class="rules-button" onclick="openRules()">Rules</button>
+            <button class="leaderboard-button" onclick="openLeaderboard()">Leaderboard</button>
         </header>
         <main>
             <div class="form-container">
@@ -110,6 +111,26 @@
             <p>Given that each has 18 answer slips and that there are only 13 problems, it is possible to submit intervals for a given problem more than once. If you do this, only the last submission for any given problem is the one that will count towards your final score. To put it another way: each submission (right or wrong) overrides any previous submissions for a given problem.</p>
         </div>
     </div>
+
+    <!-- Leaderboard Overlay -->
+    <div id="leaderboardOverlay" class="leaderboard-overlay">
+        <div class="leaderboard-content">
+            <button class="close-button" onclick="closeLeaderboard()">Back</button>
+            <h2>Leaderboard</h2>
+            <table id="leaderboardTable">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Team</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Leaderboard data will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
         
     <script>
         function validateForm() {
@@ -150,6 +171,47 @@
 
         function closeRules() {
             document.getElementById('rulesOverlay').style.right = '-100%';
+        }
+
+        let leaderboardRefreshInterval;
+
+        function openLeaderboard() {
+            // Fetch leaderboard data when the overlay is opened
+            fetchLeaderboardData();
+            document.getElementById('leaderboardOverlay').style.right = '0';
+        function closeLeaderboard() {
+            document.getElementById('leaderboardOverlay').style.right = '-100%';
+        }
+
+        async function fetchLeaderboardData() {
+            const url = 'https://script.google.com/macros/s/AKfycbwDQMvlOCaQxIg3MxJEAB9Z-8a7k5Exu6IX19OFYrzZ2Y2jTepCKzFd8poVpI8EMWITfA/exec?action=getLeaderboard';
+            const tableBody = document.querySelector('#leaderboardTable tbody');
+            tableBody.innerHTML = '<tr><td colspan="3">Loading...</td></tr>'; // Show loading message
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.error) {
+                    tableBody.innerHTML = `<tr><td colspan="3">${data.error}</td></tr>`;
+                    return;
+                }
+
+                // Clear the table and populate it with leaderboard data
+                tableBody.innerHTML = '';
+                data.forEach((team, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${team.team}</td>
+                        <td>${team.score}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching leaderboard:', error);
+                tableBody.innerHTML = '<tr><td colspan="3">Failed to load leaderboard. Please try again later.</td></tr>';
+            }
         }
     </script>
     <iframe name="hiddenConfirm" id="hiddenConfirm" style="display:none;" onload="if(submitted) {window.location='confirmation.html';}"></iframe>

@@ -310,3 +310,65 @@ button[type="submit"]:hover {
         gap: 5px;
     }
 }
+
+/* Leaderboard Overlay */
+.leaderboard-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    overflow-y: auto;
+    transition: right 0.3s ease;
+    z-index: 1000;
+}
+
+.leaderboard-content {
+    margin: 50px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.leaderboard-content h2 {
+    margin-bottom: 20px;
+}
+
+.leaderboard-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.leaderboard-content table th,
+.leaderboard-content table td {
+    border: 1px solid #555;
+    padding: 10px;
+    text-align: center;
+}
+
+.leaderboard-content table th {
+    background-color: #444;
+}
+
+.leaderboard-content table tr:nth-child(even) {
+    background-color: #555;
+}
+
+.close-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.close-button:hover {
+    background-color: #d32f2f;
+}
