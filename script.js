@@ -1,3 +1,8 @@
+// Tracks whether the leaderboard is enabled
+var leaderboardEnabled = false;
+
+/******************************************/
+
 // Validate form inputs before submission
 function validateForm() {
   var groupNumber = document.querySelector('input[name="entry.42548516"]').value;
@@ -42,8 +47,6 @@ function closeRules() {
   document.getElementById('rulesOverlay').style.right = '-100%';
 }
 
-// Tracks whether the leaderboard is enabled
-var leaderboardEnabled = true;
 let leaderboardRefreshInterval;
 
 // Opens the "Leaderboard" overlay and starts auto-refreshing the leaderboard
