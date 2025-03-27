@@ -1,5 +1,5 @@
 // Tracks whether the leaderboard is enabled
-var leaderboardEnabled = true;
+var leaderboardEnabled = false;
 
 /******************************************/
 
