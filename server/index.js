@@ -10,6 +10,10 @@ const PORT = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 
+// Routes
+const apiRoutes = require('./routes/api');
+app.use('/api', apiRoutes);
+
 // Basic Route
 app.get('/', (req, res) => {
     res.send('UW-Estimathon API is running...');

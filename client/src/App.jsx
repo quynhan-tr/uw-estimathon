@@ -10,7 +10,7 @@ function App() {
   const [error, setError] = useState(null);
 
   const fetchLeaderboardData = async () => {
-    const url = 'https://script.google.com/macros/s/AKfycbwDQMvlOCaQxIg3MxJEAB9Z-8a7k5Exu6IX19OFYrzZ2Y2jTepCKzFd8poVpI8EMWITfA/exec?action=getLeaderboard';
+    const url = 'http://localhost:5001/api/leaderboard';
     setLoading(true);
     setError(null);
     try {
@@ -38,15 +38,14 @@ function App() {
     return () => clearInterval(interval);
   }, [leaderboardOpen]);
 
-  const validateForm = (e) => {
-    const formData = new FormData(e.target);
-    const groupNumber = formData.get('entry.42548516');
-    const email = formData.get('entry.171689670');
-    const lowerBound = formData.get('entry.424934828');
-    const upperBound = formData.get('entry.342609510');
-    const questionNumber = formData.get('entry.1017256989');
+  const validateForm = (formData) => {
+    const groupNumber = formData.get('groupNumber');
+    const email = formData.get('email');
+    const lowerBound = formData.get('lowerBound');
+    const upperBound = formData.get('upperBound');
+    const questionNumber = formData.get('questionNumber');
 
-    if (isNaN(groupNumber) || !groupNumber.trim()) {
+    if (isNaN(groupNumber) || !groupNumber?.trim()) {
       alert('Please enter a valid group number');
       return false;
     }
@@ -70,12 +69,41 @@ function App() {
     return true;
   };
 
-  const handleSubmit = (e) => {
-    if (!validateForm(e)) {
-      e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    if (!validateForm(formData)) {
       return;
     }
-    setSubmitted(true);
+
+    try {
+      const payload = {
+        groupNumber: formData.get('groupNumber'),
+        email: formData.get('email'),
+        questionNumber: formData.get('questionNumber'),
+        lowerBound: formData.get('lowerBound'),
+        upperBound: formData.get('upperBound'),
+      };
+
+      const response = await fetch('http://localhost:5001/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const errorData = await response.json();
+        alert(`Error: ${errorData.error || 'Failed to submit'}`);
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      alert('Failed to connect to the server. Please check if the backend is running.');
+    }
   };
 
   if (submitted) {
@@ -107,33 +135,28 @@ function App() {
       <main>
         <div className="form-container">
           <h2>Submission</h2>
-          <form
-            action="https://docs.google.com/forms/d/e/1FAIpQLSdOYqShJsT3OjUO9PW523fWqSAv9G4d5YSxlCSRfYGGacmGTQ/formResponse"
-            method="post"
-            target="hiddenConfirm"
-            onSubmit={handleSubmit}
-          >
+          <form onSubmit={handleSubmit}>
             <label htmlFor="groupNumber">Group Number</label>
-            <input type="text" id="groupNumber" name="entry.42548516" placeholder="Enter group number" />
+            <input type="text" id="groupNumber" name="groupNumber" placeholder="Enter group number" />
 
-            <label htmlFor="contactEmail">Contact Email</label>
-            <input type="email" id="contactEmail" name="entry.171689670" placeholder="Guesses' results will be sent here" />
+            <label htmlFor="email">Contact Email</label>
+            <input type="email" id="email" name="email" placeholder="Guesses' results will be sent here" />
 
             <label>Question Number</label>
             <div className="radio-group">
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map((num) => (
                 <div className="radio-pair" key={num}>
-                  <input type="radio" id={`question${num}`} name="entry.1017256989" value={num} />
+                  <input type="radio" id={`question${num}`} name="questionNumber" value={num} />
                   <label htmlFor={`question${num}`}>{num}</label>
                 </div>
               ))}
             </div>
 
             <label htmlFor="lowerBound">Lower Bound</label>
-            <input type="text" id="lowerBound" name="entry.424934828" placeholder="Input positive number" />
+            <input type="text" id="lowerBound" name="lowerBound" placeholder="Input positive number" />
 
             <label htmlFor="upperBound">Upper Bound</label>
-            <input type="text" id="upperBound" name="entry.342609510" placeholder="Input positive number" />
+            <input type="text" id="upperBound" name="upperBound" placeholder="Input positive number" />
 
             <button type="submit">Submit</button>
           </form>
@@ -189,7 +212,6 @@ function App() {
         </div>
       </div>
 
-      <iframe name="hiddenConfirm" id="hiddenConfirm" style={{ display: 'none' }} />
     </div>
   );
 }
